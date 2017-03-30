@@ -584,6 +584,7 @@ body {
 #work-main {
   max-width: 100%;
   position: relative;
+  height: 30%;
   margin: auto;
   border: .1em solid #303aff;
 }
