@@ -141,15 +141,15 @@
             var imageX = this.image.x/this.roleSize.width * size.w*N;
             var imageY = this.image.y/this.roleSize.height * size.h*N;
 
-            // var scaleWidth=self.imgElem.width*scaleRole;
-            // var scaleHeight=self.imgElem.height*scaleRole;
+            var scaleWidth=self.imgElem.width*scaleRole;
+            var scaleHeight=self.imgElem.height*scaleRole;
             // console.log(imageX, x, scaleWidth, self.imgElem.width, self.imgElem.height);
             // 增加旋转的功能
             ctx.save();
-            // ctx.translate(imageX + x+scaleWidth/2,imageY + y+scaleHeight/2);
+            ctx.translate(imageX + x+scaleWidth/2,imageY + y+scaleHeight/2);
             ctx.rotate(this.image.rotation*Math.PI/180);
 
-            this._draw(ctx, self.imgElem, imageX + x, imageY + y, scaleRole);
+            this._draw(ctx, self.imgElem, -scaleWidth/2, -scaleHeight/2, scaleRole);
 
         },
 

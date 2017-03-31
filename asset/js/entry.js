@@ -31,7 +31,6 @@
             dataType: 'json',
             timeout: 10000,
             success: function(data){
-                hrs_send && hrs_send(data);
                 if(data&&data.data&&data.data.head_img_url){
 
                 }else{
