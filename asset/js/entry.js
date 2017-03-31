@@ -233,8 +233,10 @@
         $(this).parent().addClass('animated fadeOutUp');
 
         app.started = true;
-        app.editor._bindEvent();
+        app.editor && app.editor._bindEvent();
+
     })
+
 
 
 })(window.Zepto || window.jQuery, window.Hammer);
