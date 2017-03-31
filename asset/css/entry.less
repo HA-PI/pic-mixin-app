@@ -1,4 +1,5 @@
 @import "libs/swiper";
+@import "libs/animate.min.css";
 
 @IMG_TOP: 20px;
 @IMG_HR: 50px;
@@ -13,16 +14,25 @@
 body {
   max-width: @MAX_WIDTH;
   margin: auto;
+  background-color: rgb(32, 176, 255);
+}
+#main {
+  .title {
+    margin: 1em auto auto;
+    text-align: center;
+    color: #fff;
+  }
 }
 #work-main {
   max-width: 100%;
   position: relative;
   //top: 10em;
   height: 30%;
-  margin: auto;
+  margin: 1em auto auto;
+  background-color: #fff;
   //left: 10%;
   //right: 10%;
-  border: .1em solid #303aff;
+  //border: .1em solid transparent;
 }
 
 .swiper-pagination {
@@ -46,7 +56,7 @@ body {
   text-align: center;
   font-size: 18px;
 
-  border: 1px solid cadetblue;
+  //border: 1px solid cadetblue;
 
 }
 
@@ -85,8 +95,28 @@ body {
   //max-height: 300px;
 }
 #btn-main {
-  margin-top: 20px;
+  margin-top: 30px;
   text-align: center;
+
+  .btn {
+    //margin: auto;
+    display: block;
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px 10px;
+    span {
+      padding: 8px 10px;
+    }
+    margin-top: 10px;
+  }
+  #btn-select {
+    background: url("../imgs/green-btn.png") no-repeat center;
+    background-size: cover;
+  }
+  #btn-expert {
+    background: url("../imgs/yellow-btn.png") no-repeat center;
+    background-size: cover;
+  }
   #btn-reset {
     display: none;
   }
@@ -104,13 +134,15 @@ body {
     cursor: pointer;
     color: #bbb;
   }
+  background-color: #fff;
+
+  overflow: hidden;
+  border-radius: 10px;
 
   box-shadow: 0 1px 2px rgba(0,0,0,0.15), inset 0 -1px 0 0 #fcfcfc;
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.15),inset 0 -1px 0 0 #fcfcfc;
   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.15), inset 0 -1px 0 0 #fcfcfc;
   max-width: @MAX_WIDTH;
-  border-radius: 6px;
-  //background-color: aliceblue;
 
   top: 50%;
   left: 10px;
@@ -128,5 +160,34 @@ body {
   p {
     text-align: center;
     margin-bottom: 20px;
+  }
+}
+
+#helper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../imgs/help.png") no-repeat center center;
+  background-size: cover;
+  
+  //background-color: rgba(255,255,255,.5);
+  text-align: center;
+  z-index: 21;
+  .known-btn {
+    position: absolute;
+    display: inline-block;
+    padding: 6px 20px;
+    color: #fff;
+    margin: auto;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    transform: translateX(-50%);
+    bottom: 40px;
+    //background-image: url(../imgs/guideBTN.png);
+    //background-position: center center;
+    //background-repeat: no-repeat;
+    //background-size: cover;
   }
 }

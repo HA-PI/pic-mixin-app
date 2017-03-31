@@ -12,6 +12,7 @@
  *
  * Released on: March 10, 2017
  */
+@import "libs/animate.min.css";
 .swiper-container {
   margin-left: auto;
   margin-right: auto;
@@ -580,13 +581,19 @@ button.swiper-pagination-bullet {
 body {
   max-width: 430px;
   margin: auto;
+  background-color: #20b0ff;
+}
+#main .title {
+  margin: 1em auto auto;
+  text-align: center;
+  color: #fff;
 }
 #work-main {
   max-width: 100%;
   position: relative;
   height: 30%;
-  margin: auto;
-  border: .1em solid #303aff;
+  margin: 1em auto auto;
+  background-color: #fff;
 }
 .swiper-pagination {
   bottom: -15px;
@@ -608,7 +615,6 @@ body {
   height: 100%;
   text-align: center;
   font-size: 18px;
-  border: 1px solid cadetblue;
 }
 .swiper-container {
   position: relative;
@@ -628,19 +634,39 @@ body {
   height: 100%;
 }
 #btn-main {
-  margin-top: 20px;
+  margin-top: 30px;
   text-align: center;
+}
+#btn-main .btn {
+  display: block;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-top: 10px;
+}
+#btn-main .btn span {
+  padding: 8px 10px;
+}
+#btn-main #btn-select {
+  background: url("../imgs/green-btn.png") no-repeat center;
+  background-size: cover;
+}
+#btn-main #btn-expert {
+  background: url("../imgs/yellow-btn.png") no-repeat center;
+  background-size: cover;
 }
 #btn-main #btn-reset {
   display: none;
 }
 #preview {
   display: none;
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 -1px 0 0 #fcfcfc;
   -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 -1px 0 0 #fcfcfc;
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 -1px 0 0 #fcfcfc;
   max-width: 430px;
-  border-radius: 6px;
   top: 50%;
   left: 10px;
   right: 10px;
@@ -668,4 +694,26 @@ body {
 #preview p {
   text-align: center;
   margin-bottom: 20px;
+}
+#helper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../imgs/help.png") no-repeat center center;
+  background-size: cover;
+  text-align: center;
+  z-index: 21;
+}
+#helper .known-btn {
+  position: absolute;
+  display: inline-block;
+  padding: 6px 20px;
+  color: #fff;
+  margin: auto;
+  border: 2px solid #fff;
+  border-radius: 30px;
+  transform: translateX(-50%);
+  bottom: 40px;
 }

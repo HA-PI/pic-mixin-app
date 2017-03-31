@@ -7,7 +7,14 @@
     <link rel="stylesheet" href="asset/css/entry.css">
 </head>
 <body>
+
+<div id="helper">
+    <div class="known-btn">知道了</div>
+</div>
+
 <div id="main">
+    <div class="title">TITLE</div>
+
     <div id="work-main">
         <!--image slider-->
         <div class="swiper-container">
@@ -26,14 +33,21 @@
     </div>
     <div id="btn-main">
         <input id="input-image" type="file" accept="image/*" style="display: none;"/>
-        <button id="btn-select">选择图片</button>
-        <button id="btn-expert">导出</button>
-        <button id="btn-reset">重置</button>
+        <div class="btn">
+            <span id="btn-select">选择图片</span>
+        </div>
+        <div class="btn">
+            <span id="btn-expert">合成图片</span>
+        </div>
+        <div class="btn" id="btn-reset">重置</div>
     </div>
 
     <div id="preview"></div>
 </div>
+<script>
 
+</script>
+<script src="asset/libs/ployfill.min.js"></script>
 <script src="asset/libs/jquery.min.js"></script>
 <script src="asset/libs/hammer.min.js"></script>
 <script src="asset/libs/swiper.min.js"></script>

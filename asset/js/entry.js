@@ -1,6 +1,5 @@
 (function ($, Hammer) {
-
-    var containerWidth = Math.round(Math.min(document.body.clientWidth, document.body.clientHeight) * .5);
+    var containerWidth = Math.round(Math.min(document.body.clientWidth, document.body.clientHeight) * .75);
     var containerHeight = containerWidth//-50*2+20+30;
     $('#work-main').width(containerWidth).height(containerHeight);
 
@@ -9,6 +8,21 @@
     var imgSpace = $('#img-workspace');
     var swiperWrapper = $('.swiper-wrapper');
     var preview = $('#preview');
+
+    function getQueryJson(query) {
+        query = query.trim();
+        if (query[0] == '?') {
+            query = query.substr(1);
+        }
+
+        var kvStrs = query.split('&');
+        var queryJson = {};
+        kvStrs.map(function (kv) {
+            kv = kv.split('=');
+            queryJson[kv[0]] = decodeURIComponent(kv[1]);
+        })
+        return queryJson;
+    }
 
 
     function App(btnMain, imgSpace, swiperWrapper) {
@@ -23,8 +37,7 @@
     document.addEventListener('WeixinJSBridgeReady', function(){
         //如果执行到这块的代码,就说明是在微信内部浏览器内打开的.
         // 只有微信下才发起ajsx请求获取微信头像
-        // alert('true');
-        $.ajax({
+        /*$.ajax({
             type: 'GET',
             url: '/game/gameAjax/GetHeadimgUrl',
             // data to be added to query string:
@@ -42,10 +55,19 @@
 
                 },5000)
             }
-        });
+        });*/
     });
 
     App.prototype.isWeixinHack = (/MicroMessenger/i).test(window.navigator.userAgent);
+    App.prototype.started = false;
+    App.prototype.setRole = function (url) {
+        var self = this;
+        self.imgSpace.css('background-image', 'url('+ url +')');
+        var img = new Image();
+        img.src = url;
+        img.crossOrigin = 'anonymous';
+        self.editor = new ImgEditor(self.imgSpace, img, self.images, self.swiper.realIndex, self.started)._updateTransform();
+    };
 
     App.prototype._init = function () {
         var self = this;
@@ -53,11 +75,7 @@
             var file = self.inputImage.prop('files')[0];
             if (!file) return;
             var url = URL.createObjectURL(file);
-            self.imgSpace.css('background-image', 'url('+ url +')');
-            var img = new Image();
-            img.src = url;
-            img.crossOrigin = 'anonymous';
-            self.editor = new ImgEditor(self.imgSpace, img, self.images, self.swiper.realIndex)._updateTransform();
+            self.setRole(url);
         });
 
         this.btnMain.off('click').on('click', function (evt) {
@@ -91,6 +109,7 @@
         }.bind(this));
 
         this.initSwiper();
+        return this;
     };
 
     App.prototype.initSwiper = function () {
@@ -186,14 +205,36 @@
         str += '" class="img"/>';
         str += '<p class="create-text">长按图片<a download="pic.jpeg" href="'+src+'">保存</a></p>';
         preview.empty();
+        preview.removeClass('animated fadeOut');
         preview.append(str);
         preview.find('.close').on('click', function () {
             preview.fadeOut('normal');
-        })
+            // preview.addClass('animated fadeOut');
+        });
+        // console.log({src: src});
         preview.fadeIn('normal');
+        // preview.addClass('animated fadeIn');
     };
 
-    new App(btnMain, imgSpace, swiperWrapper)
+
+
+
+    var app = new App(btnMain, imgSpace, swiperWrapper)
         .setBgs(new Array(5).fill("asset/3910148730215781452.png"))
+
+    var json = getQueryJson(location.search);
+    var head_img_url = json && json.headimgurl;
+    if (head_img_url) {
+        //TODO
+        app.setRole('/__hrs__/forward?url='+head_img_url);
+    }
+
+    $('.known-btn').click(function () {
+        $(this).parent().addClass('animated fadeOutUp');
+
+        app.started = true;
+        app.editor._bindEvent();
+    })
+
 
 })(window.Zepto || window.jQuery, window.Hammer);

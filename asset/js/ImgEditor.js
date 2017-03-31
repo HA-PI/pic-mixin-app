@@ -5,11 +5,12 @@
     };
     const N = 2;
 
-    function ImgEditor(imgSpace, imgElem, imageList, index, eventElem) {
+    function ImgEditor(imgSpace, imgElem, imageList, index, eventAble, eventElem) {
         this.imgSpace = imgSpace;
         this.imgElem = imgElem;
         this.eventElem = eventElem || document.body;
         this.imageList = imageList;
+        this.eventAble = eventAble;
         this.index = index;
         this.start = {
             x: 0,
@@ -31,7 +32,9 @@
             height: $('.swiper-slide-active').height(),
         }
         this.hammerManager = new Hammer.Manager(this.eventElem);
-        this._bindEvent();
+        if (this.eventAble) {
+            this._bindEvent();
+        }
     }
 
     ImgEditor.prototype = {
@@ -42,9 +45,9 @@
             // threshold设置检测的最小阀值
             this.hammerManager.add(new Hammer.Pan({threshold: 0, pointers: 1}));
             // 改变pinch回调的this指向
-            this.hammerManager.on('pinchstart pinchmove', this._onPinch.bind(this));
-            this.hammerManager.on('pinchend pinchcancel', this._onPinchEnd.bind(this));
-            this.hammerManager.on('panstart panmove', this._onPan.bind(this));
+            this.hammerManager.off('pinchstart pinchmove').on('pinchstart pinchmove', this._onPinch.bind(this));
+            this.hammerManager.off('pinchend pinchcancel').on('pinchend pinchcancel', this._onPinchEnd.bind(this));
+            this.hammerManager.off('panstart panmove').on('panstart panmove', this._onPan.bind(this));
         },
 
         _onPan: function (e) {
